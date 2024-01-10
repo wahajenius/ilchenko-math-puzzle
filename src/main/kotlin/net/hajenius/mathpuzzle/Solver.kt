@@ -16,7 +16,6 @@
 package net.hajenius.mathpuzzle
 
 import java.lang.Exception
-import kotlin.math.floor
 
 /**
  * The solver algorithm uses a depth-first search to generate all possible valid RPN expressions that satisfy
@@ -70,7 +69,7 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
     private fun evaluate(expression: List<String>) {
         try {
             val result = calculate(expression)
-            if (result == goal) {
+            if (result == goal.toDouble()) {
                 solutions.add(toInfix(expression))
             }
         } catch (_: Exception) {
@@ -78,7 +77,7 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
         }
     }
 
-    private fun calculate(expression: List<String>): Int {
+    private fun calculate(expression: List<String>): Double {
         val stack = mutableListOf<Double>()
         for (token in expression) {
             if (token in operators) {
@@ -86,10 +85,8 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
             } else stack.add(token.toDouble())
         }
         check(stack.size == 1)
-        return stack.last().toInt()
+        return stack.last()
     }
-
-    private fun Double.isInt(): Boolean = !this.isInfinite() && floor(this) == this
 
     private fun binaryOperator(stack: MutableList<Double>, operator: String) {
         val y = stack.removeLast()
@@ -101,7 +98,6 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
             "/" -> x / y
             else -> error("Unknown binary operator '$operator'")
         }
-        check(result.isInt())
         stack.add(result)
     }
 
