@@ -24,7 +24,7 @@ import kotlin.math.floor
  * must always have a constant length to be valid. The expression is initially empty. Numbers are placed first,
  * then the operators. When all spots are filled an RPN calculator attempts to calculate the result.
  * If it matches the goal, the RPN is converted to infix and stored. Floating point calculation allows to weed
- * out degenerate solutions that rely on integer division rounding behavior, like (1 / 2) + (4 * 6).
+ * out degenerate solutions that rely on integer division rounding behavior, like (1 / 3) + (4 * 6).
  */
 class Solver(private val numbers: List<Int>, private val goal: Int) {
     private val nil = ""

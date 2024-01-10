@@ -17,15 +17,14 @@
 package net.hajenius.mathpuzzle
 
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import kotlin.test.DefaultAsserter.assertEquals
 
 class SolverTest {
 
   @Test
   fun testSolver() {
-    val solutions = Solver(listOf(1, 2, 4, 6), 24).solve()
-    assertEquals("wrong number of solutions", solutions.size, 22)
+    val solutions = Solver(listOf(1, 3, 4, 6), 24).solve()
+    assertEquals("wrong number of solutions", solutions.size, 1)
 
     // solutions.forEach { println(it) }
   }
