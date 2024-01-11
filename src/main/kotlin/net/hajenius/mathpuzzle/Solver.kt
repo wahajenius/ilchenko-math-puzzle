@@ -29,6 +29,7 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
     private val nil = ""
     private val solutions = mutableSetOf<String>()
     private val operators = listOf("+", "-", "*", "/")
+    var successfulCalculations = 0; private set
 
     fun solve(): Set<String> {
         val totalOperators = numbers.size - 1 // A binary operator has a net result of one less operand
@@ -80,6 +81,7 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
             } else stack.add(token.toDouble())
         }
         check(stack.size == 1)
+        ++successfulCalculations
         return stack.last()
     }
 

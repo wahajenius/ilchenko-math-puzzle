@@ -34,7 +34,9 @@ package net.hajenius.mathpuzzle
  * Andrei ILchenko
  */
 fun main() {
-    val solutions = Solver(listOf(1, 3, 4, 6), 24).solve()
-    println("Found ${solutions.size} solutions:")
+    val solver = Solver(listOf(1, 3, 4, 6), 24)
+    val solutions = solver.solve()
+    println("Found ${solutions.size} solution${if (solutions.size == 1) "" else "s"}:")
     solutions.forEach { println(it) }
+    println("${solver.successfulCalculations} calculations")
 }
