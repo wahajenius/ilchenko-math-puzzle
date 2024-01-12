@@ -51,18 +51,13 @@ class Solver(private val numbers: List<Int>, private val goal: Int) {
     }
 
     private fun placeOperator(expression: MutableList<String>) {
-        for (i in expression.indices) {
-            if (expression[i] == nil) {
-                for (op in operators) {
-                    expression[i] = op
-                    if (expression.contains(nil)) {
-                        placeOperator(expression)
-                    } else {
-                        evaluate(expression)
-                    }
-                    expression[i] = nil // Backtrack
-                }
-            }
+        val firstFree = expression.indexOfFirst { it == nil }
+        if (firstFree < 0) {
+            evaluate(expression)
+        } else for (op in operators) {
+            expression[firstFree] = op
+            placeOperator(expression)
+            expression[firstFree] = nil // Backtrack
         }
     }
 
